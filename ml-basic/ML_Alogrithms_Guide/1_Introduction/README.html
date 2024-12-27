@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>机器学习概要 &#8212; ml-basic</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ml-basic/ML_Alogrithms_Guide/1_Introduction/README';</script>
+    <link rel="canonical" href="/ml-basic/ML_Alogrithms_Guide/1_Introduction/README.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="有监督学习" href="../2_Supervised_Learning/README.html" />
+    <link rel="prev" title="Machine Learning Algorithms Guide" href="../../README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="ml-basic - Home"/>
+    <img src="../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="ml-basic - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Machine Learning Algorithms Guide
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1_Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">机器学习概要</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2_Supervised_Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/README.html">有监督学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/1_Linear_Regression/README.html">线性回归</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/2_Regularization/README.html">正则化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/3_Logistic_Regression/README.html">逻辑回归</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/4_Support_Vector_Machine/README.html">支持向量机</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/5_Support_Vector_Machine_Kernel/README.html">支持向量机（核方法）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/6_Naive_Bayes/README.html">朴素贝叶斯</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/7_Random_Forest/README.html">随机森林</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/8_Neural_Networks/README.html">神经网络</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_Supervised_Learning/9_KNN/README.html">KNN</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3_Unsupervised_Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/README.html">无监督学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/1_PCA/README.html">PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/2_LSA/README.html">LSA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/3_NMF/README.html">NMF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/4_LDA/README.html">LDA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/5_K_Means/README.html">k-means算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/6_Gaussian_Mixture_Model/README.html">混合高斯分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/7_LLE/README.html">LLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3_Unsupervised_Learning/8_t_SNE/README.html">t-SNE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4_Evaluation_and_Data_Processing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../4_Evaluation_and_Data_Processing/README.html">评估方法与数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_Evaluation_and_Data_Processing/1_Evaluation_Methods/README.html">评估方法和各种数据的处理</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../4_Evaluation_and_Data_Processing/2_Text_Data_Processing/README.html">文本数据的转换处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_Evaluation_and_Data_Processing/3_Image_Data_Processing/README.html">图像数据的转换处理</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5_Algorithm_Comparison_and_Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../5_Data_sets_and_model_testing/1_California_housing_price/README.html">线性回归任务对比</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_Data_sets_and_model_testing/2_Diabetes_dataset/README.html">非线性回归任务对比</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_Data_sets_and_model_testing/3_Breast_cancer_wisconsin/README.html">二元分类任务对比</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_Data_sets_and_model_testing/4_Iris_dataset/README.html">多元分类任务对比</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fml-basic/ML_Alogrithms_Guide/1_Introduction/README.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/ml-basic/ML_Alogrithms_Guide/1_Introduction/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>机器学习概要</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">机器学习概要</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">有监督学习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">无监督学习</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">聚类</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">降维</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">强化学习</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">机器学习的步骤</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">有监督学习（分类）的例子</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">实现</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">评估方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">无监督学习（聚类）的例子</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>机器学习概要<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p><strong>机器学习</strong>指的是计算机根据给定的问题、课题或环境进行学习，并利用学习结果解决问题或课题等的一整套机制。</p>
+<p>机器学习种类：</p>
+<ul class="simple">
+<li><p>有监督学习</p></li>
+<li><p>无监督学习</p></li>
+<li><p>强化学习</p></li>
+</ul>
+<section id="id2">
+<h2>有监督学习<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>提供问题以及答案，使计算机进行学习并产生机器学习模型。</p>
+<p>概念：</p>
+<ul class="simple">
+<li><p>特征值（特征变量）：表示特征的数据。</p></li>
+<li><p>标签（目标变量）：作为答案的数据。</p></li>
+<li><p>分类问题：预测类别的问题叫作分类问题，例如给定一堆身高体重，预测男女一样，其中给定的数据（身高体重）会告诉对应的结果（性别）。</p></li>
+<li><p>二元分类：分类问题的结果是两个类别。</p></li>
+<li><p>多元分类：例如十个类别，答案变量是离散值例如预测成绩等级，ABCDEF。</p></li>
+<li><p>回归问题：答案变量是连续的值，例如预测一个值，不是固定的在几个类别中。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>无监督学习<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>将特征值和目标变量（答案）作为一套数据进行学习的方法，而无监督学习的数 据中没有作为答案的目标变量。</p>
+<section id="id4">
+<h3>聚类<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>聚类是一种将数据集分成多个组的技术，使得组内的数据点相似性高，而组间的数据点差异性大。聚类的常见算法包括：</p>
+<p><strong>K-means</strong>：将数据点分为预定义的 K 个簇，每个簇都有一个中心点。算法通过反复更新簇中心和重新分配数据点来最小化数据点到簇中心的距离。</p>
+<p>聚类的应用包括客户分群、图像分类等。</p>
+</section>
+<section id="id5">
+<h3>降维<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>降维旨在减少数据集的维度（特征数量），以便更容易进行可视化或处理，同时尽量保持数据的关键信息。降维的常见方法包括：</p>
+<p><strong>PCA（主成分分析）</strong>：将原始特征转换为一组新的、线性不相关的特征（称为主成分），并保留尽可能多的方差信息。</p>
+<p>降维常用于数据可视化、特征提取以及减少噪声。</p>
+</section>
+</section>
+<section id="id6">
+<h2>强化学习<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>强化学习是以在某个环境下行动的智能体获得的奖励最大化为目标而进行学习的方法。</p>
+<p>是一种机器学习方法，通过与环境的交互学习如何采取最佳行动，以最大化长期累积的奖励。强化学习的核心思想是智能体（agent）通过试错学习和反馈不断改进决策策略。</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id7">
+<h1>机器学习的步骤<a class="headerlink" href="#id7" title="Link to this heading">#</a></h1>
+<p>机器学习需要数据，本文使用 scikit-learn 包内置的数据。</p>
+<p>机器学习需要的是二维的表格形式的数据，例如学生表格</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>姓名</p></th>
+<th class="head"><p>身高</p></th>
+<th class="head"><p>体重</p></th>
+<th class="head"><p>出生日期</p></th>
+<th class="head"><p>性别</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>165</p></td>
+<td><p>60</p></td>
+<td><p>1995.10.02</p></td>
+<td><p>男</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>150</p></td>
+<td><p>45</p></td>
+<td><p>1996.01.20</p></td>
+<td><p>女</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>170</p></td>
+<td><p>70</p></td>
+<td><p>1995.05.29</p></td>
+<td><p>男</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>160</p></td>
+<td><p>50</p></td>
+<td><p>1995.08.14</p></td>
+<td><p>女</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>以体重身高预测性别为例，这是一个有监督学习的例子。</p>
+<p>我们以身高体重作为特征变量，性别作为目标变量。</p>
+<p>以下我们使用这个包内的鸢尾花（iris）数据作为例子。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Species&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><strong>sepal length (cm)</strong></p></th>
+<th class="head"><p><strong>sepal width (cm)</strong></p></th>
+<th class="head"><p><strong>petal length (cm)</strong></p></th>
+<th class="head"><p><strong>petal width (cm)</strong></p></th>
+<th class="head"><p><strong>Species</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>0</strong></p></td>
+<td><p>5.1</p></td>
+<td><p>3.5</p></td>
+<td><p>1.4</p></td>
+<td><p>0.2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>1</strong></p></td>
+<td><p>4.9</p></td>
+<td><p>3.0</p></td>
+<td><p>1.4</p></td>
+<td><p>0.2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>2</strong></p></td>
+<td><p>4.7</p></td>
+<td><p>3.2</p></td>
+<td><p>1.3</p></td>
+<td><p>0.2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>3</strong></p></td>
+<td><p>4.6</p></td>
+<td><p>3.1</p></td>
+<td><p>1.5</p></td>
+<td><p>0.2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>4</strong></p></td>
+<td><p>5.0</p></td>
+<td><p>3.6</p></td>
+<td><p>1.4</p></td>
+<td><p>0.2</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>前面 4 列是表示特征的特征值，最后 1 列是目标变量。在这个数据集中，目标变量的值为 0、1、2 这 3 个值之一</p>
+<section id="id8">
+<h2>有监督学习（分类）的例子<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>这个例子是美国威斯康星州乳腺癌数据集，通过30个特征值判断肿瘤是良性或者恶性</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><strong>mean radius</strong></p></th>
+<th class="head"><p><strong>mean texture</strong></p></th>
+<th class="head"><p><strong>mean perimeter</strong></p></th>
+<th class="head"><p><strong>mean area</strong></p></th>
+<th class="head"><p><strong>mean smoothness</strong></p></th>
+<th class="head"><p><strong>mean compactness</strong></p></th>
+<th class="head"><p><strong>mean concavity</strong></p></th>
+<th class="head"><p><strong>mean concave points</strong></p></th>
+<th class="head"><p><strong>mean symmetry</strong></p></th>
+<th class="head"><p><strong>mean fractal dimension</strong></p></th>
+<th class="head"><p><strong>…</strong></p></th>
+<th class="head"><p><strong>worst texture</strong></p></th>
+<th class="head"><p><strong>worst perimeter</strong></p></th>
+<th class="head"><p><strong>worst area</strong></p></th>
+<th class="head"><p><strong>worst smoothness</strong></p></th>
+<th class="head"><p><strong>worst compactness</strong></p></th>
+<th class="head"><p><strong>worst concavity</strong></p></th>
+<th class="head"><p><strong>worst concave points</strong></p></th>
+<th class="head"><p><strong>worst symmetry</strong></p></th>
+<th class="head"><p><strong>worst fractal dimension</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>17.99</p></td>
+<td><p>10.38</p></td>
+<td><p>122.80</p></td>
+<td><p>1001.0</p></td>
+<td><p>0.11840</p></td>
+<td><p>0.27760</p></td>
+<td><p>0.3001</p></td>
+<td><p>0.14710</p></td>
+<td><p>0.2419</p></td>
+<td><p>0.07871</p></td>
+<td><p>…</p></td>
+<td><p>17.33</p></td>
+<td><p>184.60</p></td>
+<td><p>2019.0</p></td>
+<td><p>0.1622</p></td>
+<td><p>0.6656</p></td>
+<td><p>0.7119</p></td>
+<td><p>0.2654</p></td>
+<td><p>0.4601</p></td>
+<td><p>0.11890</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>20.57</p></td>
+<td><p>17.77</p></td>
+<td><p>132.90</p></td>
+<td><p>1326.0</p></td>
+<td><p>0.08474</p></td>
+<td><p>0.07864</p></td>
+<td><p>0.0869</p></td>
+<td><p>0.07017</p></td>
+<td><p>0.1812</p></td>
+<td><p>0.05667</p></td>
+<td><p>…</p></td>
+<td><p>23.41</p></td>
+<td><p>158.80</p></td>
+<td><p>1956.0</p></td>
+<td><p>0.1238</p></td>
+<td><p>0.1866</p></td>
+<td><p>0.2416</p></td>
+<td><p>0.1860</p></td>
+<td><p>0.2750</p></td>
+<td><p>0.08902</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>19.69</p></td>
+<td><p>21.25</p></td>
+<td><p>130.00</p></td>
+<td><p>1203.0</p></td>
+<td><p>0.10960</p></td>
+<td><p>0.15990</p></td>
+<td><p>0.1974</p></td>
+<td><p>0.12790</p></td>
+<td><p>0.2069</p></td>
+<td><p>0.05999</p></td>
+<td><p>…</p></td>
+<td><p>25.53</p></td>
+<td><p>152.50</p></td>
+<td><p>1709.0</p></td>
+<td><p>0.1444</p></td>
+<td><p>0.4245</p></td>
+<td><p>0.4504</p></td>
+<td><p>0.2430</p></td>
+<td><p>0.3613</p></td>
+<td><p>0.08758</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>11.42</p></td>
+<td><p>20.38</p></td>
+<td><p>77.58</p></td>
+<td><p>386.1</p></td>
+<td><p>0.14250</p></td>
+<td><p>0.28390</p></td>
+<td><p>0.2414</p></td>
+<td><p>0.10520</p></td>
+<td><p>0.2597</p></td>
+<td><p>0.09744</p></td>
+<td><p>…</p></td>
+<td><p>26.50</p></td>
+<td><p>98.87</p></td>
+<td><p>567.7</p></td>
+<td><p>0.2098</p></td>
+<td><p>0.8663</p></td>
+<td><p>0.6869</p></td>
+<td><p>0.2575</p></td>
+<td><p>0.6638</p></td>
+<td><p>0.17300</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>20.29</p></td>
+<td><p>14.34</p></td>
+<td><p>135.10</p></td>
+<td><p>1297.0</p></td>
+<td><p>0.10030</p></td>
+<td><p>0.13280</p></td>
+<td><p>0.1980</p></td>
+<td><p>0.10430</p></td>
+<td><p>0.1809</p></td>
+<td><p>0.05883</p></td>
+<td><p>…</p></td>
+<td><p>16.67</p></td>
+<td><p>152.20</p></td>
+<td><p>1575.0</p></td>
+<td><p>0.1374</p></td>
+<td><p>0.2050</p></td>
+<td><p>0.4000</p></td>
+<td><p>0.1625</p></td>
+<td><p>0.2364</p></td>
+<td><p>0.07678</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中我们可以发现，数据有30列，也就是一条记录有30多个数据。 看完了表格，我们提取特征值赋给x，目标值赋给y。</p>
+<p>其中30个特征值分为平均值，误差值，最差值三类，作为特征值提供，我我们只使用其中的平均值，只需要运行</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">target</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>这行操作使得平均值被记录给x，作为特征值只有10项。</p>
+<section id="id9">
+<h3>实现<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>使用逻辑回归算法进行分类，提供特征值和目标值</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>输出 0.9121265377855887</p>
+<p>以上的代码使用输入的数据进行模型建立，model接收到数据进行学习，成为学习后的模型，将对原来的输入数据进行预测，将预测结果保存到<code class="docutils literal notranslate"><span class="pre">y_pred</span></code></p>
+</section>
+<section id="id10">
+<h3>评估方法<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>使用 scikit-learn 的 accuracy_score 函数查看正确率是模型预测结果和给定数据的结果进行比较的正确率。</p>
+<p>过拟合：当模型在训练数据上表现良好，但在未见过的数据上预测性能差时，称为过拟合。模型的评估应使用未用于训练的数据，以确保其在未知数据上的预测能力。</p>
+<p>评估指标的局限性：仅依靠正确率来评估模型性能可能会误导，尤其是在数据类别不均衡的情况下。例如，在分类任务中，若数据中“恶性”样本较少，模型可能简单地将所有样本判断为“良性”，从而导致高正确率，但实际上模型的表现并不好。</p>
+<p>数据均衡性：在处理类别不均衡的数据时，正确率并不能全面反映模型的性能，需结合其他评估指标（如精确率、召回率、F1-score等）进行综合评估</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id11">
+<h1>无监督学习（聚类）的例子<a class="headerlink" href="#id11" title="Link to this heading">#</a></h1>
+<p>我们采用 scikit-learn 包内置的与葡萄酒种类有关的数据集 先大致看一下数据集</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><strong>alcohol</strong></p></th>
+<th class="head"><p><strong>malic_acid</strong></p></th>
+<th class="head"><p><strong>ash</strong></p></th>
+<th class="head"><p><strong>alcalinity_of_ash</strong></p></th>
+<th class="head"><p><strong>magnesium</strong></p></th>
+<th class="head"><p><strong>total_phenols</strong></p></th>
+<th class="head"><p><strong>flavanoids</strong></p></th>
+<th class="head"><p><strong>nonflavanoid_phenols</strong></p></th>
+<th class="head"><p><strong>proanthocyanins</strong></p></th>
+<th class="head"><p><strong>color_intensity</strong></p></th>
+<th class="head"><p><strong>hue</strong></p></th>
+<th class="head"><p><strong>od280/od315_of_diluted_wines</strong></p></th>
+<th class="head"><p><strong>proline</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>14.23</p></td>
+<td><p>1.71</p></td>
+<td><p>2.43</p></td>
+<td><p>15.6</p></td>
+<td><p>127.0</p></td>
+<td><p>2.80</p></td>
+<td><p>3.06</p></td>
+<td><p>0.28</p></td>
+<td><p>2.29</p></td>
+<td><p>5.64</p></td>
+<td><p>1.04</p></td>
+<td><p>3.92</p></td>
+<td><p>1065.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>13.20</p></td>
+<td><p>1.78</p></td>
+<td><p>2.14</p></td>
+<td><p>11.2</p></td>
+<td><p>100.0</p></td>
+<td><p>2.65</p></td>
+<td><p>2.76</p></td>
+<td><p>0.26</p></td>
+<td><p>1.28</p></td>
+<td><p>4.38</p></td>
+<td><p>1.05</p></td>
+<td><p>3.40</p></td>
+<td><p>1050.0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>13.16</p></td>
+<td><p>2.36</p></td>
+<td><p>2.67</p></td>
+<td><p>18.6</p></td>
+<td><p>101.0</p></td>
+<td><p>2.80</p></td>
+<td><p>3.24</p></td>
+<td><p>0.30</p></td>
+<td><p>2.81</p></td>
+<td><p>5.68</p></td>
+<td><p>1.03</p></td>
+<td><p>3.17</p></td>
+<td><p>1185.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>14.37</p></td>
+<td><p>1.95</p></td>
+<td><p>2.50</p></td>
+<td><p>16.8</p></td>
+<td><p>113.0</p></td>
+<td><p>3.85</p></td>
+<td><p>3.49</p></td>
+<td><p>0.24</p></td>
+<td><p>2.18</p></td>
+<td><p>7.80</p></td>
+<td><p>0.86</p></td>
+<td><p>3.45</p></td>
+<td><p>1480.0</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>13.24</p></td>
+<td><p>2.59</p></td>
+<td><p>2.87</p></td>
+<td><p>21.0</p></td>
+<td><p>118.0</p></td>
+<td><p>2.80</p></td>
+<td><p>2.69</p></td>
+<td><p>0.39</p></td>
+<td><p>1.82</p></td>
+<td><p>4.32</p></td>
+<td><p>1.04</p></td>
+<td><p>2.93</p></td>
+<td><p>735.0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>简化数据集，使用十三个特征值中的酒精度和色泽作为特征值进行聚类算法，分割为三个簇</p>
+<p>以下是对数据集的简化，提取区中的酒精度和色泽作为特征值。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>上面的代码导入了k-means聚类算法，设置3即为指示模型将数据集分成三个簇。传入x，再将预测结果返回赋值给pred。</p>
+<p>通过 KMeans 算法，原本以酒精度和色泽表示的葡萄酒数据，现在以“属于哪个簇”的形式直观展示。要了解各个簇的特征，只需查看重心值。例如，第 3 个簇的特点是“酒精度低、色泽淡”。KMeans 聚类是基于算法自动生成的规则，例如“将酒精度百分之多少以上的数据分到第 1 个簇”，这说明算法的通用性，适用于葡萄酒以外的数据。</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ml-basic\ML_Alogrithms_Guide\1_Introduction"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Machine Learning Algorithms Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../2_Supervised_Learning/README.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">有监督学习</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">机器学习概要</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">有监督学习</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">无监督学习</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">聚类</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">降维</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">强化学习</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">机器学习的步骤</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">有监督学习（分类）的例子</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">实现</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">评估方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">无监督学习（聚类）的例子</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

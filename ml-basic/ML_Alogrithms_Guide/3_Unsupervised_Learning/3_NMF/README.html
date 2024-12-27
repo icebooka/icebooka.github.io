@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>NMF &#8212; ml-basic</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ml-basic/ML_Alogrithms_Guide/3_Unsupervised_Learning/3_NMF/README';</script>
+    <link rel="canonical" href="/ml-basic/ML_Alogrithms_Guide/3_Unsupervised_Learning/3_NMF/README.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="LDA" href="../4_LDA/README.html" />
+    <link rel="prev" title="LSA" href="../2_LSA/README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="ml-basic - Home"/>
+    <img src="../../../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="ml-basic - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../README.html">
+                    Machine Learning Algorithms Guide
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">1_Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../1_Introduction/README.html">机器学习概要</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">2_Supervised_Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/README.html">有监督学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/1_Linear_Regression/README.html">线性回归</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/2_Regularization/README.html">正则化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/3_Logistic_Regression/README.html">逻辑回归</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/4_Support_Vector_Machine/README.html">支持向量机</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/5_Support_Vector_Machine_Kernel/README.html">支持向量机（核方法）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/6_Naive_Bayes/README.html">朴素贝叶斯</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/7_Random_Forest/README.html">随机森林</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/8_Neural_Networks/README.html">神经网络</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../2_Supervised_Learning/9_KNN/README.html">KNN</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3_Unsupervised_Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">无监督学习</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../1_PCA/README.html">PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2_LSA/README.html">LSA</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NMF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../4_LDA/README.html">LDA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../5_K_Means/README.html">k-means算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../6_Gaussian_Mixture_Model/README.html">混合高斯分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../7_LLE/README.html">LLE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../8_t_SNE/README.html">t-SNE</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4_Evaluation_and_Data_Processing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../4_Evaluation_and_Data_Processing/README.html">评估方法与数据处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_Evaluation_and_Data_Processing/1_Evaluation_Methods/README.html">评估方法和各种数据的处理</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../4_Evaluation_and_Data_Processing/2_Text_Data_Processing/README.html">文本数据的转换处理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../4_Evaluation_and_Data_Processing/3_Image_Data_Processing/README.html">图像数据的转换处理</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5_Algorithm_Comparison_and_Performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../5_Data_sets_and_model_testing/1_California_housing_price/README.html">线性回归任务对比</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../5_Data_sets_and_model_testing/2_Diabetes_dataset/README.html">非线性回归任务对比</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../5_Data_sets_and_model_testing/3_Breast_cancer_wisconsin/README.html">二元分类任务对比</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../5_Data_sets_and_model_testing/4_Iris_dataset/README.html">多元分类任务对比</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fml-basic/ML_Alogrithms_Guide/3_Unsupervised_Learning/3_NMF/README.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/ml-basic/ML_Alogrithms_Guide/3_Unsupervised_Learning/3_NMF/README.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NMF</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">算法说明</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">实例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">抽象化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">示例代码</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">详细说明</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nmfpca">NMF与PCA的比较</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nmf">
+<h1>NMF<a class="headerlink" href="#nmf" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>NMF(Non-negative Martix Factorization,非负矩阵分解)是一种降维算法也是一种矩阵分解方法。</p>
+<p>NMF有以下特点：</p>
+<ul class="simple">
+<li><p>原始矩阵的元素和分解后矩阵的元素是非负数</p></li>
+<li><p>没有“潜在语义空间的每一个维度都是正交的”这一约束条件</p></li>
+</ul>
+<p>以下分别为对二维数据应用NMF和PCA的结果。</p>
+<p><img alt="1.png" src="../../../../_images/18.png" /></p>
+<p>可以看出NMF的潜在空间的每个轴会靠近密集的点，使得轴上有重复信息。这一特性使得我们可以捕捉到多个数据块的特征。</p>
+<p>而PCA等算法则由于其潜在空间的维度是正交的，所以无法找到所有数据块的特征。</p>
+</section>
+<section id="id2">
+<h2>算法说明<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>实例<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>假设我们有以下三篇文档：</p>
+<ul class="simple">
+<li><p>文档1：谈论人工智能和机器学习。</p></li>
+<li><p>文档2：讨论深度学习和神经网络。</p></li>
+<li><p>文档3：介绍数据分析和统计学。</p></li>
+</ul>
+<p>通过 NMF，可以将文档表示为某些“主题”的线性组合。例如：</p>
+<ul class="simple">
+<li><p>主题A：与“人工智能、机器学习”相关。</p></li>
+<li><p>主题B：与“统计学、数据分析”相关。</p></li>
+<li><p>主题C：与“深度学习、神经网络”相关。</p></li>
+</ul>
+<p><strong>NMF 的结果</strong>可能如下：</p>
+<ul class="simple">
+<li><p>文档1 ≈ 0.6 × 主题A + 0.3 × 主题C</p></li>
+<li><p>文档2 ≈ 0.8 × 主题C + 0.1 × 主题A</p></li>
+<li><p>文档3 ≈ 0.7 × 主题B + 0.2 × 主题A</p></li>
+</ul>
+<p>这个表示让我们可以用<strong>主题分布</strong>来描述每篇文档，比如：</p>
+<ul class="simple">
+<li><p>文档1的“主题A贡献”为0.6，“主题C贡献”为0.3。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>抽象化<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>设原始数据为<span class="math notranslate nohighlight">\(n\)</span>行<span class="math notranslate nohighlight">\(d\)</span>列的矩阵<span class="math notranslate nohighlight">\(V\)</span>。将其表示为两个矩阵<span class="math notranslate nohighlight">\(W\)</span>和<span class="math notranslate nohighlight">\(H\)</span>的乘积。</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W\)</span>是<span class="math notranslate nohighlight">\(n\)</span>行<span class="math notranslate nohighlight">\(r\)</span>列的矩阵，是一个 文档 - 主题 矩阵每一行表示一个文档在不同主题上的权重。</p></li>
+<li><p><span class="math notranslate nohighlight">\(H\)</span>是<span class="math notranslate nohighlight">\(r\)</span>行<span class="math notranslate nohighlight">\(d\)</span>列的矩阵，每一列表示一个主题在各个词汇上的权重。</p></li>
+<li><p><span class="math notranslate nohighlight">\(WH\)</span>是原始矩阵<span class="math notranslate nohighlight">\(V\)</span>的近似，选择比<span class="math notranslate nohighlight">\(d\)</span>小的<span class="math notranslate nohighlight">\(r\)</span>就可以进行降维。</p></li>
+</ul>
+<p><img alt="2.png" src="../../../../_images/27.png" /></p>
+<p>在求<span class="math notranslate nohighlight">\(W\)</span>和<span class="math notranslate nohighlight">\(H\)</span>的过程中，NMF在<span class="math notranslate nohighlight">\(W ≥ 0、H ≥ 0\)</span>的条件下，使<span class="math notranslate nohighlight">\(WH\)</span>接近<span class="math notranslate nohighlight">\(V\)</span>。</p>
+<p>NMF采取“将<span class="math notranslate nohighlight">\(H\)</span>视为常数，更新<span class="math notranslate nohighlight">\(W\)</span>”“ 将<span class="math notranslate nohighlight">\(W\)</span>视为常数，更新<span class="math notranslate nohighlight">\(H\)</span>”的方式交替更新<span class="math notranslate nohighlight">\(W\)</span>和<span class="math notranslate nohighlight">\(H\)</span>.</p>
+<p>以下对NMF过程进行可视化。</p>
+<p>灰色的点为原始矩阵<span class="math notranslate nohighlight">\(V\)</span>，绿色的点为近似矩阵<span class="math notranslate nohighlight">\(WH\)</span>。随着计算的进行，我们可以看到近似矩阵越来越接近原始矩阵。此外，红线和蓝线是潜在空间的轴，所有近似矩阵的图形都能在潜在空间（二维空间）的轴上表示出来</p>
+<ul>
+<li><p>将<span class="math notranslate nohighlight">\(W\)</span>和<span class="math notranslate nohighlight">\(H\)</span>初始化为正值。</p></li>
+<li><p>将<span class="math notranslate nohighlight">\(H\)</span>视为常数，更新<span class="math notranslate nohighlight">\(W\)</span>。</p></li>
+<li><p>将<span class="math notranslate nohighlight">\(W\)</span>视为常数，更新<span class="math notranslate nohighlight">\(H\)</span>。</p></li>
+<li><p>当<span class="math notranslate nohighlight">\(W\)</span>和<span class="math notranslate nohighlight">\(H\)</span>收敛时，停止计算。</p>
+<p><img alt="3.png" src="../../../../_images/35.png" /></p>
+</li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>示例代码<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">NMF</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets.samples_generator</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+<span class="n">centers</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span>
+<span class="n">V</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">)</span>  <span class="c1"># 以centers为中心生成数据</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 潜在变量的个数</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">NMF</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="c1"># 分解后的矩阵</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">components_</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>详细说明<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<section id="nmfpca">
+<h3>NMF与PCA的比较<a class="headerlink" href="#nmfpca" title="Link to this heading">#</a></h3>
+<p>将NMF和PCA应用到一个人脸数据集上（19像素×19像素，2429张），降维后由49个变量表示数据。即将361个特征变换为49个潜在变量。</p>
+<p>将49个潜在变量可视化</p>
+<p><img alt="4.png" src="../../../../_images/43.png" /></p>
+<p>左图为PCA结果，每张图像表示了人的整个面部，负值暗，正值亮。PCA通过将不同的脸加在一起恢复原始图像。</p>
+<p>右图为NMF的结果，暗区较多，但这些区域的值为0.。每个潜在变量代表了人脸的一部分特征。NMF通过组合具有人脸部分特征的图像来回复原始图像，NMF的潜在变量含义可解释性更强，能够清晰地反映数据的实际意义和结构。</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ml-basic\ML_Alogrithms_Guide\3_Unsupervised_Learning\3_NMF"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../2_LSA/README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">LSA</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../4_LDA/README.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LDA</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">算法说明</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">实例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">抽象化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">示例代码</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">详细说明</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nmfpca">NMF与PCA的比较</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
